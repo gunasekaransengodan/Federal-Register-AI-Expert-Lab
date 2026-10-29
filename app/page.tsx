@@ -11,7 +11,7 @@ import { PrivateLLMPanel } from '@/components/private-llm-panel'
 import { usePersistentState } from '@/lib/use-persistent-state'
 
 const ogImage = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/OG%20image-5O3cfbSeWfc7YIqk1Jc1i1qdo0jWVC.jpg'
-const brandLogo = '/aadhiyal-logo.jpg'
+const brandLogo = '/favicon.jpg'
 const brains = [
   ['sql', 'Exact SQL', 'DuckDB-WASM', Database], ['intent', 'Vague-to-Exact', 'Embedding → proof', Sparkles], ['graph', 'Knowledge Graph', 'Relations', Network], ['prediction', 'Prediction', 'Time-to-final', BarChart3], ['contradiction', 'Contradiction', 'Conflict detection', ShieldCheck], ['llm', 'Private LLM', 'Gemma 2B', LockKeyhole], ['agent', 'Agentic Action', 'Cited workflows', Zap], ['symbolic', 'Neuro-Symbolic', 'Rules + reason', Code2], ['simulation', 'What-If Simulation', 'Scenario engine', Workflow], ['fusion', 'Fusion', 'FR + EDGAR', GitBranch],
 ] as const

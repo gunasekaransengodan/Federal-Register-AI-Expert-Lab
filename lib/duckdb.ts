@@ -3,7 +3,7 @@ import * as duckdb from '@duckdb/duckdb-wasm'
 const cdn = 'https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.33.1-dev57.0/dist/'
 const bundles = duckdb.getJsDelivrBundles()
 
-export const DATASET_GLOB = 'hf://datasets/GadgetSoftware/federal-register/documents/2026/*.parquet'
+export const DATASET_GLOB = 'hf://datasets/GadgetSoftware/federal-register/documents/*/*.parquet'
 export const DATASET_HTTP_GLOB = 'https://huggingface.co/datasets/GadgetSoftware/federal-register/resolve/main/documents/*.parquet'
 
 export async function resolveDatasetSource() {

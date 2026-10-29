@@ -32,7 +32,7 @@ export function DuckDBDashboard() {
       async function runQueries(source: string) {
         return Promise.all([
           queryDataset<DashboardRow>(`SELECT COUNT(*)::INTEGER AS total, COUNT(*) FILTER (WHERE type = 'Proposed Rule')::INTEGER AS proposed, COUNT(*) FILTER (WHERE type = 'Final Rule')::INTEGER AS final, COUNT(*) FILTER (WHERE TRY_CAST(comments_close_on AS DATE) > CURRENT_DATE)::INTEGER AS open FROM ${source}`),
-          queryDataset<AgencyRow>(`SELECT agency, COUNT(*)::INTEGER AS count FROM ${source}, UNNEST(agency_names) AS t(agency) WHERE agency IS NOT NULL GROUP BY agency ORDER BY count DESC LIMIT 4`),
+          queryDataset<AgencyRow>(`SELECT UNNEST(agency_names) AS agency, COUNT(*)::INTEGER AS count FROM ${source} WHERE agency_names IS NOT NULL GROUP BY agency ORDER BY count DESC LIMIT 4`),
           queryDataset<MonthRow>(`SELECT strftime(TRY_CAST(publication_date AS DATE), '%b') AS month, EXTRACT(MONTH FROM TRY_CAST(publication_date AS DATE))::INTEGER AS month_number, COUNT(*) FILTER (WHERE type = 'Proposed Rule')::INTEGER AS proposed, COUNT(*) FILTER (WHERE type = 'Final Rule')::INTEGER AS final FROM ${source} WHERE publication_date IS NOT NULL GROUP BY month, month_number ORDER BY month_number`),
           queryDataset<LatestRow>(`SELECT publication_date, type, title, array_to_string(agency_names, ', ') AS agency, document_number FROM ${source} ORDER BY publication_date DESC LIMIT 6`),
         ])

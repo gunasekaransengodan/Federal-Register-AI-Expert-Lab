@@ -4,14 +4,15 @@ import { useRef, useState } from 'react'
 import { BrainCircuit, CheckCircle2, Download, LockKeyhole, ShieldCheck, Sparkles } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { CreateMLCEngine, type MLCEngine } from '@mlc-ai/web-llm'
+import { usePersistentState } from '@/lib/use-persistent-state'
 
 const F16_MODEL = 'gemma-2-2b-it-q4f16_1-MLC'
 const F32_MODEL = 'gemma-2-2b-it-q4f32_1-MLC'
 
 export function PrivateLLMPanel() {
   const engineRef = useRef<MLCEngine | null>(null)
-  const [prompt, setPrompt] = useState('Paste CFR or Federal Register text to summarize...')
-  const [output, setOutput] = useState('')
+  const [prompt, setPrompt] = usePersistentState('fr-ai-lab:private-llm:prompt', 'Paste CFR or Federal Register text to summarize...')
+  const [output, setOutput] = usePersistentState('fr-ai-lab:private-llm:output', '')
   const [status, setStatus] = useState<'idle' | 'loading' | 'ready' | 'running' | 'error'>('idle')
   const [progress, setProgress] = useState(0)
   const [error, setError] = useState('')
